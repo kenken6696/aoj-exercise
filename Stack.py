@@ -1,25 +1,33 @@
+# 逆ポーランド記法はstack
 
-def mystraggle():
-    if __name__ == '__main__':
-        p = 0
-        input_list = input().split()
-        while len(input_list) > p
-            if input_list[p + 1].isdecimal():
-                ans = calc(input_list[p], input_list[p+1], input_list[p+2])
-            else:
-                ans = calc(ans, input_list[p], input_list[p+1])
-            p = p + 3
-        print(ans)
+class Stack:
+    def __init__(self):
+        self.stack = []
 
-def calc(num1, num2, ope):
-    int ans = 0
-    if ope == '+':
-        ans = num1 + num2
-    elif ope == '-':
-        ans = num1 - num2
-    elif ope == '*':
-        ans = num1 * num2
-    return ans
+    def push(self, num):
+        self.stack.append(num)
 
-def main():
-    mystraggle()
+    def pop(self):
+        return self.stack.pop()
+
+    def calc(self, ope):
+        ans = 0
+        num1 = self.pop()
+        num2 = self.pop()
+        if ope == '+':
+            ans = num2 + num1
+        elif ope == '-':
+            ans = num2 - num1
+        elif ope == '*':
+            ans = num2 * num1
+        self.push(ans)
+
+
+stack = Stack()
+input_list = input().split()
+for i in input_list:
+    if i.isdecimal():
+        stack.push(int(i))
+    else:
+        stack.calc(i)
+print(stack.pop())
